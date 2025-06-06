@@ -1,5 +1,16 @@
-# Progetto per l'esame di Progetto di Sistemi Web - Backend ReST
+# Progetto per l'esame "Progetto di Sistemi Web"
 
+Progetto svolto per l'esame di Progetto di Sistemi Web. Il progetto è stato dockerizzato per renderne più facile l'uso.
+Questa repository contiene sia il backend che il frontend. Dopo il quickstart si riportano i README originali delle due repository (backend e frontend).
+
+## Quickstart
+```bash
+docker compose up
+```
+Poi visitare il sito all'URL http://localhost:4200.
+
+# Progetto per l'esame di Progetto di Sistemi Web - Backend ReST
+![](logo.png)
 ## Introduzione
 Questa è la parte backend del mio progetto, e si occupa di fornire un servizio ReST.\
 Il servizio permette ai client di effettuare operazioni CRUD su una base dati di canzoni.\
@@ -70,3 +81,13 @@ specificata). La richiesta con specificazione della pagina avrà quindi la segue
     Guava --> Metodi I/O per fornire l'iconcina "favicon.ico"
     
 Per la versione delle dipendenze utilizzare consultare il file build.gradle.
+
+# ProgettoPSWFrontend
+Frontend del mio progetto per l'esame di Progetto di Sistemi Web.
+## Dipendenze
+### !ATTENZIONE!
+Questo progetto utilizza l'installazione locale di Boostrap e, per alcune funzionalità, jQuery.
+Queste vanno quindi installate manualmente, visto che non è inclusa la cartella node_modules.
+Per installare le dipendenze, occorrono quindi i seguenti comandi:\
+<code>npm install bootstrap</code>\
+<code>npm install jquery --save</code>
