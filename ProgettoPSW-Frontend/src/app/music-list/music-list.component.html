@@ -1,0 +1,48 @@
+<div class="container">
+      <table class="table table-bordered table-striped table-light">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Titolo</th>
+            <th scope="col">Autore</th>
+            <th scope="col">Album</th>
+            <th scope="col">Year</th>
+            <th scope="col">Genre</th>
+            <th scope="col">URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let music of musicList">
+            <td>{{ music.id }}</td>
+            <td>{{ music.title }}</td>
+            <td>{{ music.author }}</td>
+            <td>{{ music.album }}</td>
+            <td>{{ music.year }}</td>
+            <td>{{ music.genre }}</td>
+            <td>
+              <a [href]="music.url" target="_blank">Ascolta</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <blockquote class="blockquote text-center">
+        <p class="mb-0">Pagina {{ page }}</p>
+        <p class="text-info">Usa i pulsanti per navigare le pagine.</p>
+      </blockquote>
+
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <button class="btn btn-primary m-5" [disabled]="page == 0" (click)="prevPage()">Pagina precedente</button>
+            <button class="btn btn-primary m-5" [disabled]="noNextPage" (click)="nextPage()">Pagina successiva</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert fade step m-3" [class.show]="show" [class.alert-success]="success" [class.alert-danger]="!success" role="alert">
+        <button type="button" class="close" (click)="show = false" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Messaggio dal server:</strong> {{ message }}
+      </div>
+  </div>

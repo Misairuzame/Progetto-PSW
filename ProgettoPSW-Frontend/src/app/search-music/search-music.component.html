@@ -1,0 +1,78 @@
+<div class="container">
+    <table class="table table-bordered table-striped table-light">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Titolo</th>
+          <th scope="col">Autore</th>
+          <th scope="col">Album</th>
+          <th scope="col">Year</th>
+          <th scope="col">Genre</th>
+          <th scope="col">URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let music of musicList">
+          <td>{{ music.id }}</td>
+          <td>{{ music.title }}</td>
+          <td>{{ music.author }}</td>
+          <td>{{ music.album }}</td>
+          <td>{{ music.year }}</td>
+          <td>{{ music.genre }}</td>
+          <td>
+            <a [href]="music.url" target="_blank">Ascolta</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="container" [hidden]="!success">
+    <blockquote class="blockquote text-center">
+      <p class="mb-0">Pagina {{ page }}</p>
+      <p class="text-info">Usa i pulsanti per navigare le pagine.</p>
+    </blockquote>
+        <div class="row">
+          <div class="col text-center">
+            <button class="btn btn-primary m-5" [disabled]="page == 0" (click)="prevPage()">Pagina precedente</button>
+            <button class="btn btn-primary m-5" [disabled]="noNextPage" (click)="nextPage()">Pagina successiva</button>
+          </div>
+        </div>
+    </div>
+
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col">
+                <label for="title">Titolo</label>
+                <input class="form-control" formControlName="title" type="text" name="title" id="title" placeholder="Titolo">
+            </div>
+            <div class="col">
+                <label for="author">Autore</label>
+                <input class="form-control" formControlName="author" type="text" name="author" id="author" placeholder="Autore">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="album">Album</label>
+                <input class="form-control" formControlName="album" type="text" name="album" id="album" placeholder="Album">
+            </div>        
+            <div class="col">
+                <label for="year">Anno</label>
+                <input class="form-control" formControlName="year" type="number" name="year" id="year" placeholder="Anno" min=0>
+            </div>
+            <div class="col">
+                <label for="genre">Genere</label>
+                <input class="form-control" formControlName="genre" type="text" name="genre" id="genre" placeholder="Genere">
+            </div>
+            <div class="col">
+                <input type="submit" class="btn mt-4" [disabled]="!isFormValid()" [class.btn-primary]="isFormValid()"
+                [class.btn-secondary]="!isFormValid()" value="Cerca">
+            </div>
+        </div>
+    </form>
+
+    <div class="alert fade step m-3" [class.show]="show" [class.alert-success]="success" [class.alert-danger]="!success" role="alert">
+        <button type="button" class="close" (click)="show = false" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Messaggio dal server:</strong> {{ message }}
+    </div>
+</div>

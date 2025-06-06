@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+.show {
+    opacity: 1 !important;
+}
+.step {
+    opacity: 0;
+    transition: .5s ease-in-out all;
+}
+body {
+    background: url('assets/background-3.webp') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}

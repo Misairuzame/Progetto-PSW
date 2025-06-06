@@ -1,0 +1,10 @@
+services:
+  backend:
+    build: ProgettoPSW-ReST
+    ports:
+      - 8080:8080
+  frontend:
+    build: ProgettoPSW-Frontend
+    ports:
+      - 4200:4200
+    

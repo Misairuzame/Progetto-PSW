@@ -1,0 +1,106 @@
+<div class="container">
+    <form>
+        <label for="method">Metodo d'inserimento</label>
+        <select class="form-control" name="method" id="method" [(ngModel)]="method">
+            <option selected value="none">--- Selezionare ---</option>
+            <option value="post">Una musica (POST)</option>
+            <option value="put">Più musiche (PUT)</option>
+        </select>
+    </form>
+
+    <div id="oneMusic" [hidden]="method!=='post'" class="mt-3">
+        <form [formGroup]="insertForm" (ngSubmit)="addOne()">
+                <div class="form-group">
+                    <label for="musicId">ID Musica</label>
+                    <input class="form-control" formControlName="musicId" type="number" name="musicId" id="musicId" placeholder="ID">
+                </div>
+                <div class="form-group">
+                    <label for="title">Titolo</label>
+                    <input class="form-control" formControlName="title" type="text" name="title" id="title" placeholder="Titolo">
+                </div>
+                <div class="form-group">
+                    <label for="author">Autore</label>
+                    <input class="form-control" formControlName="author" type="text" name="author" id="author" placeholder="Autore">
+                </div>
+                <div class="form-group">
+                    <label for="album">Album</label>
+                    <input class="form-control" formControlName="album" type="text" name="album" id="album" placeholder="Album">
+                </div>        
+                <div class="form-group">
+                    <label for="year">Anno</label>
+                    <input class="form-control" formControlName="year" type="number" name="year" id="year" placeholder="Anno" min=0>
+                </div>
+                <div class="form-group">
+                    <label for="genre">Genere</label>
+                    <input class="form-control" formControlName="genre" type="text" name="genre" id="genre" placeholder="Genere">
+                </div>
+                <div class="form-group">
+                    <label for="url">URL</label>
+                    <input class="form-control" formControlName="url" type="text" name="url" id="url" placeholder="Esempio: https://youtube.com/watch?v=...">
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-block" [disabled]="!insertForm.valid" [class.btn-primary]="insertForm.valid"
+                    [class.btn-secondary]="!insertForm.valid" value="Inserisci">
+                </div>
+        </form>
+    </div>
+
+    <div id="manyMusic" [hidden]="method!=='put'" class="mt-3" *ngFor="let form of insertManyForm; let i = index">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col">
+                <label for="musicId">ID Musica</label>
+                <input class="form-control" formControlName="musicId" type="number" name="musicId" placeholder="ID">
+            </div>
+            <div class="col">
+                <label for="title">Titolo</label>
+                <input class="form-control" formControlName="title" type="text" name="title" placeholder="Titolo">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="author">Autore</label>
+                <input class="form-control" formControlName="author" type="text" name="author" placeholder="Autore">
+            </div>        
+            <div class="col">
+                <label for="album">Album</label>
+                <input class="form-control" formControlName="album" type="text" name="album" placeholder="Album">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="year">Anno</label>
+                <input class="form-control" formControlName="year" type="number" name="year" placeholder="Anno" min=0>
+            </div>        
+            <div class="col">
+                <label for="genre">Genere</label>
+                <input class="form-control" formControlName="genre" type="text" name="genre" placeholder="Genere">
+            </div>
+            <div class="col">
+                <label for="url">URL</label>
+                <input class="form-control" formControlName="url" type="text" name="genre" placeholder="Esempio: https://youtube.com/watch?v=...">
+            </div>
+            <div class="col">                
+                <button class="btn btn-danger mt-4" [disabled]="this.insertManyForm.length == 1" (click)="removeForm(i)">
+                    Rimuovi form
+                </button>
+            </div>
+        </div>
+    </form>
+    <hr/>
+    </div>
+    <button class="btn btn-primary btn-block mt-4" [hidden]="method!=='put'" (click)="addOneForm()">
+        Aggiungi form
+    </button>
+    <button [hidden]="method!=='put'" class="btn btn-block mt-3" [disabled]="!allFormsValid()" [class.btn-primary]="allFormsValid()"
+        [class.btn-secondary]="!allFormsValid()" (click)="addMany()">
+        Inserisci tutte
+    </button>
+
+    <div class="alert fade step m-3" [class.show]="show" [class.alert-success]="success" [class.alert-danger]="!success" role="alert">
+        <button type="button" class="close" (click)="show = false" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Messaggio dal server:</strong> {{ message }}
+    </div>
+</div>
